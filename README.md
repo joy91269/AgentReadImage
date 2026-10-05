@@ -2,4 +2,6 @@
 
 代理自主判读耳石年龄的探索性实验。
 
-项目当前状态和阅读入口见 [START_HERE.md](START_HERE.md)；唯一主计划由该入口链接。当前材料用于 Pro 审核，实验尚未启动。
+三轮试读已完成。[英文整体汇报及图表](docs/OVERALL_REPORT_EN.md)包含结果、观察策略、用量和局限。
+
+项目当前状态见 [START_HERE.md](START_HERE.md)，实验方案见 [docs/PLAN.md](docs/PLAN.md)。
