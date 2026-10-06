@@ -6,15 +6,20 @@
 
 **Astra could inspect otolith images and choose its own image-processing steps, but age estimates were unreliable in these three trials.** Exact agreement with expert reference ages was 10% for Greenland halibut, 40% for Walleye, and 0% for Crappie, with ten test cases per dataset. Astra withheld an age on eight of the thirty cases. All eight numeric Crappie estimates were too low, usually by one year.
 
-**Outcomes among the ten test cases in each trial**
+**Astra and historical specialist models on the same ten cases per dataset**
 
-| Dataset | Exact | Off by one year | Error >1 year | Abstain / unable to read |
-|---|---:|---:|---:|---:|
-| Greenland halibut | 1 (10%) | 2 (20%) | 5 (50%) | 2 (20%) |
-| Walleye | 4 (40%) | 1 (10%) | 1 (10%) | 4 (40%) |
-| Crappie | 0 (0%) | 7 (70%) | 1 (10%) | 2 (20%) |
+| Dataset | Method | Exact | Off by one year | Error >1 year | Abstain | Within one year |
+|---|---|---:|---:|---:|---:|---:|
+| Greenland halibut | Astra | 1 | 2 | 5 | 2 | 30% |
+| Greenland halibut | Historical B5 | 1 | 3 | 6 | 0 | 40% |
+| Walleye | Astra | 4 | 1 | 1 | 4 | 50% |
+| Walleye | Historical A0 | 9 | 1 | 0 | 0 | 100% |
+| Crappie | Astra | 0 | 7 | 1 | 2 | 70% |
+| Crappie | Historical B0 | 10 | 0 | 0 | 0 | 100% |
 
-“Off by one” means an absolute error of exactly one year. Adding Exact and Off by one gives within-one-year agreement of **30%, 50%, and 70%**, respectively. Each row accounts for all ten cases. Abstentions represent withheld age estimates; all three sessions completed without recorded command failures or model-request retries.
+The four outcome counts sum to ten in each row. “Off by one” means an absolute error of exactly one year after rounding; within-one-year agreement includes both Exact and Off by one, with all ten cases in the denominator. Astra’s Exact rates were **10%, 40%, and 0%**, compared with **10%, 90%, and 100%** for the historical models. Abstentions represent withheld age estimates; all three Astra sessions completed without recorded command failures or model-request retries.
+
+MAE is also available in Tables 3 and 4. Astra’s values cover only its 8, 6, and 8 numeric predictions, whereas each historical model covers all ten cases. Historical-model inference time and usage for these cases were unavailable, so a resource-cost comparison cannot be made. The existing predictions were reused without retraining or rerunning any model.
 
 The existing specialist-model predictions were more accurate on the two freshwater samples. Their training and model-selection histories were only partly verified, so they serve as historical context. These small trials do not establish general performance or isolate the effect of changes in reading guidance. The clearest next step is to check Astra’s band interpretations against expert-marked annuli and the dataset’s actual counting rules before adding more cases.
 
