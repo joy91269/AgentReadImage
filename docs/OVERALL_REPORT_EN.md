@@ -6,6 +6,16 @@
 
 **Astra could inspect otolith images and choose its own image-processing steps, but age estimates were unreliable in these three trials.** Exact agreement with expert reference ages was 10% for Greenland halibut, 40% for Walleye, and 0% for Crappie, with ten test cases per dataset. Astra withheld an age on eight of the thirty cases. All eight numeric Crappie estimates were too low, usually by one year.
 
+**Outcomes among the ten test cases in each trial**
+
+| Dataset | Exact | Off by one year | Error >1 year | Abstain / unable to read |
+|---|---:|---:|---:|---:|
+| Greenland halibut | 1 (10%) | 2 (20%) | 5 (50%) | 2 (20%) |
+| Walleye | 4 (40%) | 1 (10%) | 1 (10%) | 4 (40%) |
+| Crappie | 0 (0%) | 7 (70%) | 1 (10%) | 2 (20%) |
+
+“Off by one” means an absolute error of exactly one year. Adding Exact and Off by one gives within-one-year agreement of **30%, 50%, and 70%**, respectively. Each row accounts for all ten cases. Abstentions represent withheld age estimates; all three sessions completed without recorded command failures or model-request retries.
+
 The existing specialist-model predictions were more accurate on the two freshwater samples. Their training and model-selection histories were only partly verified, so they serve as historical context. These small trials do not establish general performance or isolate the effect of changes in reading guidance. The clearest next step is to check Astra’s band interpretations against expert-marked annuli and the dataset’s actual counting rules before adding more cases.
 
 **The work followed five steps:**
