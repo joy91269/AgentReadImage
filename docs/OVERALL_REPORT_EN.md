@@ -2,9 +2,21 @@
 
 **Three-Trial Feasibility Report | 3 October 2026**
 
-We completed three exploratory trials to assess whether Codex, using GPT-6 Astra vision and a small set of expert-aged reference images, could autonomously estimate fish age from otolith photographs. Each trial provided five labeled reference images and ten anonymous test images. The datasets were Greenland halibut, Walleye, and Crappie.
+## 0. Main findings and workflow
 
-Astra could inspect the images, generate useful views, and explain where the bands were difficult to read. Its age estimates were unreliable: exact agreement with the reference ages was 10% for Greenland halibut, 40% for Walleye, and 0% for Crappie. The available historical specialist-model predictions were substantially more accurate on the two freshwater samples. These results describe what happened with five reference images per dataset. Broader claims about autonomous age reading would require further evidence.
+**Astra could inspect otolith images and choose its own image-processing steps, but age estimates were unreliable in these three trials.** Exact agreement with expert reference ages was 10% for Greenland halibut, 40% for Walleye, and 0% for Crappie, with ten test cases per dataset. Astra withheld an age on eight of the thirty cases. All eight numeric Crappie estimates were too low, usually by one year.
+
+The existing specialist-model predictions were more accurate on the two freshwater samples. Their training and model-selection histories were only partly verified, so they serve as historical context. These small trials do not establish general performance or isolate the effect of changes in reading guidance. The clearest next step is to check Astra’s band interpretations against expert-marked annuli and the dataset’s actual counting rules before adding more cases.
+
+**The work followed five steps:**
+
+1. **Prepare each trial.** Select five labeled reference images from the training/development side and ten anonymous test cases from an existing evaluation pool.
+2. **Give Astra the task and references.** Use a separate execution session with the existing model, reading instructions, and local image tools. Keep test ages outside the prediction session.
+3. **Let Astra inspect and decide.** View all original images, create crops or enlarged views as needed, and submit an integer age or an explicit abstention for each test case.
+4. **Freeze and score.** Save all ten outputs before systematic evaluation, calculate MAE and rounded Exact/within-one-year agreement, and match existing specialist-model predictions to the same cases. Section 5 records the Walleye evaluator’s premature exposure to some age metadata; those fields did not reach the prediction session.
+5. **Review behavior and resource use.** Preserve observations and processing choices, total the available usage logs, and compare the implementation with the advisor’s original plan.
+
+The three prediction sessions took about 56 minutes and used 182 model requests. Their cumulative usage was 10,116,690 tokens, mostly cached input; monetary cost was unavailable. The following sections give the sampling, methods, results, figures, and limitations.
 
 ## 1. Purpose and experimental setup
 
@@ -136,13 +148,15 @@ The implementation differed from the original plan in several important ways. We
 
 The consolidated tables and age-confusion summaries were prepared after the trials. The audit identifies these later additions separately from records collected during execution.
 
-## 7. Assessment and recommended next step
+## 7. Conclusions and recommended next step
 
 The image-handling workflow worked, while age estimates remained unreliable. The gap from the historical specialist models was especially large for the freshwater samples. Astra’s explanations often described recognizable image features, yet the link between those features and the correct annual boundaries still needs expert checking.
 
 I recommend pausing further blind expansion until the reading convention can be checked against a small number of expert-annotated reference images. The most useful additions would identify the core, first annulus, successive annual boundaries, and the treatment of the outer edge, together with the actual dataset-specific age convention. The Crappie results give us a specific question to check: where does the agent’s count first diverge from the expert’s count?
 
 If further work is authorized, the reference annotations and reading rules should be fixed before fresh cases are evaluated. A controlled comparison could then assess their effect. This follow-up is a proposal; all three completed prediction sets remain unchanged.
+
+The completed trials demonstrate a workable image-inspection process and a clear age-reading limitation under the tested settings. Expert annotations of the annual boundaries would make the next investigation more informative, particularly for Crappie’s consistent underestimation. All three trials are complete; further testing requires a separate decision and authorization.
 
 ## Appendix A. Supporting records and figure reproduction
 
