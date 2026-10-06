@@ -11,11 +11,13 @@
 | Dataset | Method | Exact | Off by one year | Error >1 year | Abstain | Within one year |
 |---|---|---:|---:|---:|---:|---:|
 | Greenland halibut | Astra | 1 | 2 | 5 | 2 | 30% |
-| Greenland halibut | Historical B5 | 1 | 3 | 6 | 0 | 40% |
+| Greenland halibut | ResNet-18 + linear regression head* | 1 | 3 | 6 | 0 | 40% |
 | Walleye | Astra | 4 | 1 | 1 | 4 | 50% |
-| Walleye | Historical A0 | 9 | 1 | 0 | 0 | 100% |
+| Walleye | ConvNeXt-Tiny + linear regression head | 9 | 1 | 0 | 0 | 100% |
 | Crappie | Astra | 0 | 7 | 1 | 2 | 70% |
-| Crappie | Historical B0 | 10 | 0 | 0 | 0 | 100% |
+| Crappie | ConvNeXt-Tiny + linear regression head | 10 | 0 | 0 | 0 | 100% |
+
+*The Greenland architecture is identified from the archived implementation. Its exact checkpoint and the binding between that implementation and the saved predictions remain unverified.
 
 The four outcome counts sum to ten in each row. “Off by one” means an absolute error of exactly one year after rounding; within-one-year agreement includes both Exact and Off by one, with all ten cases in the denominator. Astra’s Exact rates were **10%, 40%, and 0%**, compared with **10%, 90%, and 100%** for the historical models. Abstentions represent withheld age estimates; all three Astra sessions completed without recorded command failures or model-request retries.
 
@@ -91,9 +93,9 @@ Existing specialist-model predictions were matched to the same ten cases in each
 
 | Dataset | Existing prediction source | MAE, years; n = 10 | Exact agreement | Within one year |
 |---|---|---:|---:|---:|
-| Greenland halibut | B5, seed 13 | 1.7864 | 10% | 40% |
-| Walleye | A0, ConvNeXt-Tiny linear, seed 104729 | 0.2677 | 90% | 100% |
-| Crappie | B0, ConvNeXt-Tiny linear, seed 104729 | 0.1315 | 100% | 100% |
+| Greenland halibut | ResNet-18 + linear regression head*, seed 13 | 1.7864 | 10% | 40% |
+| Walleye | ConvNeXt-Tiny + linear regression head, seed 104729 | 0.2677 | 90% | 100% |
+| Crappie | ConvNeXt-Tiny + linear regression head, seed 104729 | 0.1315 | 100% | 100% |
 
 We reused the historical predictions without a new audit of the models’ full checkpoint-selection and tuning histories. The Crappie cases came from a retrospective evaluation pool. The independence and fairness of these comparisons therefore remain only partly established. The MAE denominators also differ: the specialist-model values cover all ten cases, while Astra’s values cover only cases with a numeric prediction.
 
